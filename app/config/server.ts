@@ -115,10 +115,11 @@ function getApiKey(keys?: string) {
   const randomIndex = Math.floor(Math.random() * apiKeys.length);
   const apiKey = apiKeys[randomIndex];
   if (apiKey) {
+    const redactedApiKey = apiKey.slice(0, 5) + "*****";
     console.log(
       `[Server Config] using ${randomIndex + 1} of ${
         apiKeys.length
-      } api key - ${apiKey}`,
+      } api key - ${redactedApiKey}`,
     );
   }
 

@@ -135,7 +135,19 @@ export const FunctionToolService = {
             });
           }
           if (authLocation == "query") {
-            parameters[headerName] = tokenValue;
+            const headerNames: string[] = headerName
+              .split(",")
+              .map((header) => header.trim());
+            const tokenValues: string[] = (tokenValue ?? "")
+              .split(",")
+              .map((value) => value.trim());
+            if (headerNames.length === tokenValues.length) {
+              for (let i = 0; i < headerNames.length; i++) {
+                const headerNamei = headerNames[i];
+                const tokenValuei = tokenValues[i];
+                parameters[headerNamei] = tokenValuei;
+              }
+            }
           } else if (authLocation == "body") {
             args[headerName] = tokenValue;
           }
